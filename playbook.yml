@@ -1,0 +1,33 @@
+---
+- name: Configure Server
+  become: true
+  hosts: server
+  roles:
+    - role: geerlingguy.docker
+  tasks:
+    - name: Pull docker dumbproxy image
+      tags: dumbproxy_pull
+      community.docker.docker_image_pull:
+        name: ghcr.io/senseunit/dumbproxy
+        tag: 1.11
+
+    - name: Create and start dumbproxy container
+      tags: dumbproxy_create
+      community.docker.docker_container:
+        name: dumbproxy
+        image: ghcr.io/senseunit/dumbproxy:1.11
+        entrypoint:
+          - /dumbproxy
+          - -bind-address
+          - :52866
+          - -auth
+          - 'static://?username={{ dumbproxy_user }}&password={{ dumbproxy_password }}'
+        detach: true
+        recreate: true
+        restart_policy: unless-stopped
+        security_opts:
+          - no-new-privileges
+        exposed_ports:
+          - 52866
+        published_ports:
+          - 52866:52866
