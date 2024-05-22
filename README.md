@@ -1,6 +1,11 @@
+# Ansible Proxy Server
+
+This project is designed to configure a [dumbproxy](https://github.com/senseunit/dumbproxy) on a server using Ansible.
+
+
 # How to run the playbook?
 
-## 1. Install ansible 
+## 1. Install ansible
 Look ["Installing Ansible"](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for more details (Ansible official documentation)
 
 
@@ -28,7 +33,7 @@ dumbproxy_port: 8080
 
 The URL for working proxy will be `http://admin:12345@255.255.255.255:8080`
 
-## 4. Run playbook
+## 5. Run playbook
 ```
 ansible-playbook playbook.yml -i inventory.ini -K
 ```
