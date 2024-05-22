@@ -9,27 +9,26 @@ Look ["Installing Ansible"](https://docs.ansible.com/ansible/latest/installation
 ansible-galaxy role install -r requirements.yml
 ```
 
-## 3. Create local inventory file
-Copy `inventory.ini.example` to `local-inventory.ini`, so you can safely modify it.
-
-## 4. Create encrypted vars file
-Remove my personal vault
+## 3. Change inventory.ini file
+In this file you should put your server IP (`ansible_host`)
 ```
-rm group_vars/server
+[server]
+SERVER_NAME ansible_host=255.255.255.255 ansible_user=root
 ```
 
-Create your own vault (example variables are located at `group_vars/server.example`)
+## 4. Change variables in group_vars/server
+This is credentials you will use to connect to your proxy server
 ```
-ansible-vault create --vault-id @prompt ./group_vars/server
+---
+# This is example values
+dumbproxy_user: admin
+dumbproxy_password: 12345
+dumbproxy_port: 8080
 ```
+
+The URL for working proxy will be `http://admin:12345@255.255.255.255:8080`
 
 ## 4. Run playbook
 ```
-ansible-playbook playbook.yml -i local-inventory.ini --ask-vault-pass
+ansible-playbook playbook.yml -i inventory.ini -K
 ```
-
----
-## Debugging
-You can save your vault password in file, so you won't need to enter it every time:
-- save vault password in `vault-pass.local` file
-- run playbook with `--vault-password-file=vault-pass.local` instead of `--ask-vault-pass`

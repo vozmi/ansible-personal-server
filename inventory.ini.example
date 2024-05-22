@@ -1,2 +1,0 @@
-[server]
-SERVER_NAME ansible_host=11.11.11.11 ansible_user=root

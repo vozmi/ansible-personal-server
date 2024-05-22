@@ -28,6 +28,6 @@
         security_opts:
           - no-new-privileges
         exposed_ports:
-          - 52866
+          - "{{ dumbproxy_port }}"
         published_ports:
-          - 52866:52866
+          - "{{ dumbproxy_port }}:{{ dumbproxy_port }}"

@@ -1,6 +1,0 @@
----
-# Use vault to store your password in encrypted group_vars/server file
-ansible_user: server_host
-ansible_password: server_host_password
-dumbproxy_user: dumbproxy_user
-dumbproxy_password: dumbproxy_password
