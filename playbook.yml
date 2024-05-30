@@ -19,7 +19,7 @@
         entrypoint:
           - /dumbproxy
           - -bind-address
-          - :52866
+          - ":{{ dumbproxy_port }}"
           - -auth
           - 'static://?username={{ dumbproxy_user }}&password={{ dumbproxy_password }}'
         detach: true
